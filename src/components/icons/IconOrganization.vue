@@ -1,0 +1,41 @@
+<script lang="ts" setup>
+import { withDefaults } from 'vue'
+interface IProps {
+  width?: string;
+  height?: string;
+  color?: string;
+}
+
+const props = withDefaults(defineProps<IProps>(), {
+  width: '20',
+  height: '20',
+  color: 'currentColor',
+})
+</script>
+
+<template>
+  <svg
+    fill="none"
+    :height="props.height"
+    viewBox="0 0 20 20"
+    :width="props.width"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M16.1911 10.9475H12.8196L14.9417 12.9244V18.0334L19.719 18.0527V14.0334L16.1911 10.9475Z"
+      :fill="props.color"
+    />
+    <path
+      d="M4.11027 10.1083L-0.000366211 13.1944V18.0333H12.9908V13.1944L9.14192 10.1083H4.11027Z"
+      :fill="props.color"
+    />
+    <path
+      d="M6.47637 8.21599C8.21653 8.21599 9.62721 6.81274 9.62721 5.08174C9.62721 3.35073 8.21653 1.94748 6.47637 1.94748C4.73621 1.94748 3.32553 3.35073 3.32553 5.08174C3.32553 6.81274 4.73621 8.21599 6.47637 8.21599Z"
+      :fill="props.color"
+    />
+    <path
+      d="M13.333 9.5264C14.9109 9.5264 16.1901 8.25395 16.1901 6.6843C16.1901 5.11465 14.9109 3.84219 13.333 3.84219C11.755 3.84219 10.4758 5.11465 10.4758 6.6843C10.4758 8.25395 11.755 9.5264 13.333 9.5264Z"
+      :fill="props.color"
+    />
+  </svg>
+</template>
