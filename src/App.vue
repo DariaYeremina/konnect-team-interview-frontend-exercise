@@ -1,25 +1,24 @@
+<script lang="ts" setup>
+import TheHeader from '@/components/TheHeader.vue'
+import { computed, ref } from 'vue'
+
+const headerRef = ref<Record<string, any>>({})
+
+const headerHeight = computed(() => headerRef.value?.headerHeight)
+</script>
+
 <template>
-  <header>
-    <div class="nav">
-      <router-link to="/">
-        Home
-      </router-link>
-    </div>
-  </header>
-  <main>
+  <TheHeader ref="headerRef" />
+  <main
+    :style="{ '--header-height': `${headerHeight}px` }"
+  >
     <router-view />
   </main>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'App',
-})
-</script>
-
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 html {
   margin: 0;
   padding: 0;
@@ -27,25 +26,11 @@ html {
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: $font-family;
   font-weight: 400;
   font-size: 1.6rem;
   line-height: 1.2;
   margin: 0 auto;
-}
-
-.nav {
-  padding: 16px;
-  margin-bottom: 4rem;
-  border-bottom: 1px solid #333;
-
-  a {
-    font-weight: 700;
-    color: blue;
-
-    &.router-link-exact-active {
-      color: green;
-    }
-  }
+  color: $gray-600;
 }
 </style>

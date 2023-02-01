@@ -5,9 +5,11 @@ import response from './data'
 const app = express()
 
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({
-  extended: false,
-}))
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+  }),
+)
 
 // Data route
 app.route('/api/:entity').get((req: Request, res: Response) => {
@@ -19,10 +21,15 @@ app.route('/api/:entity').get((req: Request, res: Response) => {
   }
 
   // Get the request query string object
-  const query: string = String(req.query.q || '').trim().toLowerCase()
+  const query: string = String(req.query.q || '')
+    .trim()
+    .toLowerCase()
 
   // Determine if the property includes the filter string
-  const itemContainsFilter = (str: string) => (String(str || '').toLowerCase().includes(query) || false)
+  const itemContainsFilter = (str: string) =>
+    String(str || '')
+      .toLowerCase()
+      .includes(query) || false
 
   let filteredData: Record<string, any>[]
 
@@ -34,7 +41,11 @@ app.route('/api/:entity').get((req: Request, res: Response) => {
       for (const property in responseData) {
         // Only allow searching when the object property is typeof `string`
         // If string is found, return true
-        if (responseData[property] && typeof responseData[property] === 'string' && itemContainsFilter(responseData[property])) {
+        if (
+          responseData[property] &&
+          typeof responseData[property] === 'string' &&
+          itemContainsFilter(responseData[property])
+        ) {
           return true
         }
       }

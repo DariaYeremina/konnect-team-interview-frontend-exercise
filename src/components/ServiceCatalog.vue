@@ -1,84 +1,58 @@
-<template>
-  <div class="service-catalog">
-    <h1>Service Catalog</h1>
-    <input
-      v-model="searchQuery"
-      class="search-input"
-      placeholder="Search services"
-    >
-    <ul
-      class="catalog"
-    >
-      <li
-        v-for="service in services"
-        :key="service.id"
-        class="service"
-      >
-        <div>
-          <p>
-            {{ service.name }}
-          </p>
-          <p>{{ service.description }}</p>
-        </div>
-      </li>
-    </ul>
-  </div>
-</template>
+<script lang="ts" setup>
+import ServiceCard from '@/components/ServiceCard.vue'
+import BasePagination from '@/components/BasePagination.vue'
+import { useServicesStore } from '@/stores/useServicesStore'
+import { storeToRefs } from 'pinia'
+import { watch } from 'vue'
+import { useRouter } from 'vue-router'
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import useServices from '@/composables/useServices'
+const { updatePagination } = useServicesStore()
+const { displayedServices, page, perPage, totalServicesAmount } = storeToRefs(useServicesStore())
+const router = useRouter()
 
-export default defineComponent({
-  name: 'ServiceCatalog',
-  setup() {
-    // Import services from the composable
-    const { services, loading } = useServices()
-
-    // Set the search string to a Vue ref
-    const searchQuery = ref('')
-
-    return {
-      services,
-      loading,
-      searchQuery,
-    }
-  },
+watch(() => page.value, (val, oldValue) => {
+  if (val !== oldValue) {
+    updatePagination()
+  }
 })
+
+const navigateToDetails = (id: string): void => {
+  router.push({ name: 'service-details', params: { id } })
+}
 </script>
 
+<template>
+  <section class="service-catalog">
+    <div class="catalog">
+      <ServiceCard
+        v-for="service in displayedServices"
+        :key="service.id"
+        :service="service"
+        @click="navigateToDetails"
+      />
+    </div>
+
+    <BasePagination
+      :current-page="page"
+      :per-page="perPage"
+      :total="totalServicesAmount"
+      @update:page="page = $event"
+    />
+  </section>
+</template>
+
 <style lang="scss" scoped>
-.service-catalog {
-  max-width: 1366px;
-  margin: 2rem auto;
-  padding: 0 20px;
-}
-
 .catalog {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 20px 0 0 0;
-  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
+  margin-bottom: 2.4rem;
 }
 
-.service {
-  width: 200px;
-  margin: 6px;
-  border: 1px solid #999;
-  border-radius: 10px;
-  padding: 8px 16px;
-
-  p:first-of-type {
-    color: #333;
-    font-weight: 700;
+@media screen and (max-width: $screen_md) {
+  .catalog {
+    display: flex;
+    flex-direction: column;
   }
-
-  p {
-    color: #666;
-  }
-}
-
-input {
-  padding: 8px 4px;
 }
 </style>

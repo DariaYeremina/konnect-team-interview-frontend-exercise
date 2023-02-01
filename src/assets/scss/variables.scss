@@ -1,4 +1,10 @@
+//fonts
+$font-family: "Inter", sans-serif;
+
+
+// colors
 $gray-50: #F8F8FA;
+$gray-100: #B9BABB;
 $gray-200: #E7E7EC;
 $gray-300: #707888;
 $gray-400: #8A8A8A;
@@ -6,7 +12,12 @@ $gray-500: #6F7787;
 $gray-600: #3C4557;
 $gray-800: #0B172D;
 $gray-900: #262626;
+$blueGray-50: #F1F1F5;
+$blueGray-100: #F1F1F8;
+$blueGray-200: #999EAA;
+$blueGray-300: #B6B6BD;
 $blueGray-400: #ADB6C8;
+$blueGray-500: #777D8A;
 $green-300: #42D782;
 $green-400: #14B59A;
 $green-500: #07A88D;
@@ -15,7 +26,15 @@ $blue-200: #BDD3F9;
 $blue-300: #A6C6FF;
 $blue-400: #5888DB;
 $blue-500: #1456CB;
+$blue-600: #1155CB;
 $blue-700: #073382;
 $blue-800: #09224F;
 $blue-900: #072863;
 $teal-400: #0A7FAE;
+$orange-500: #FABE5F;
+
+// breakpoints
+$screen_xl: 1280px;
+$screen_lg: 1024px;
+$screen_md: 768px;
+$screen_sm: 640px;

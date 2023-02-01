@@ -1,13 +1,14 @@
-<template>
-$END$
-</template>
-
-<script>
-export default {
-name: "BaseLoader"
-}
+<script lang="ts" setup>
 </script>
 
-<style scoped>
+<template>
+  <div class="loader">
+    Loading...
+  </div>
+</template>
 
+<style lang="scss" scoped>
+.loader {
+  text-align: center;
+}
 </style>

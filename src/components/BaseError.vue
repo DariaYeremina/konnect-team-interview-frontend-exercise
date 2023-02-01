@@ -1,13 +1,14 @@
-<template>
-$END$
-</template>
-
-<script>
-export default {
-name: "BaseError"
-}
+<script lang="ts" setup>
 </script>
 
-<style scoped>
+<template>
+  <div class="error">
+    Error
+  </div>
+</template>
 
+<style lang="scss" scoped>
+.error {
+  text-align: center;
+}
 </style>

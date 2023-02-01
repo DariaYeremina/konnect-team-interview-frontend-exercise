@@ -1,18 +1,29 @@
 <script lang="ts" setup>
+import { computed, withDefaults } from 'vue'
+import { useScreenSize } from '@/composables/useScreenSize'
+
+const { smAndSmaller } = useScreenSize()
+
 interface IProps {
   title: string;
+  hideOnSmallScreen?: boolean;
 }
 
 interface IEmit {
   (event: 'click'): void;
 }
-const props = defineProps<IProps>()
+const props = withDefaults(defineProps<IProps>(), {
+  title: '',
+  hideOnSmallScreen: false,
+})
 
 const emit = defineEmits<IEmit>()
 
 const emitClick = (): void => {
   emit('click')
 }
+
+const hideText = computed(() => props.hideOnSmallScreen && smAndSmaller.value)
 </script>
 
 <template>
@@ -21,15 +32,14 @@ const emitClick = (): void => {
     @click="emitClick"
   >
     <slot />
-    <span>{{ props.title }}</span>
+    <span v-if="!hideText">{{ props.title }}</span>
   </a>
 </template>
 
 <style scoped lang="scss">
 .link {
-  display: inline-flex;
-  align-items: center;
-  column-gap: 12px;
+  @include inline-vertical-center;
+  column-gap: 1.2rem;
   font-weight: 600;
   font-size: 1.5rem;
   color: #fff;

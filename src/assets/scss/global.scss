@@ -1,0 +1,15 @@
+@import "variables.scss";
+
+@mixin main-padding {
+  padding: 5.3rem 6rem 2.7rem 2rem;
+}
+
+@mixin block-vertical-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin inline-vertical-center {
+  display: flex;
+  align-items: center;
+}

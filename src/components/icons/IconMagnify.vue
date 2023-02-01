@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<IProps>(), {
 <template>
   <svg
     fill="none"
-    :height="props.heigth"
+    :height="props.height"
     viewBox="0 0 17 17"
     :width="props.width"
     xmlns="http://www.w3.org/2000/svg"
