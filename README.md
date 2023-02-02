@@ -158,4 +158,12 @@ If you're unfamiliar, it is **recommended** to use the following command in orde
 yarn commit
 ```
 
+
 This will trigger the Commitizen interactive prompt for building your commit message.
+
+# For the purpose of this task the following solutions were implemented:
+1) View layout. App.vue component was used as a bas layout for the entire application. In real life project if I needed to have different layouts for pages, I would create base layout abstract component  and specific layout components. Using the base layout inside the pages I would import specific layout based on meta data from routes.
+2) Routing. As I have only only 2 routes, I put them inside index file. If I had a complex application with many routes, I would separate them into different files and import to index.
+3) API calls and Axios. For this small application I left getServices call as is. In real life projects it is a good practice to wrap Axios in a proxi class. Also I would create an abstract composable which would return a state of given api call. In terms of error handling, as here I had only 1 call, I left it in a store. But the easier way of handling errors is adding it in Axios interceptors.
+4) Search. I used 500ms delay on fetchServices call. In addition, in many cases, there is no reasons to make a search only by 1 letter. It could be a good improvment to add a condition to make a fetchServices call if a query length is equal or greater than 2 (or 3).
+5) CSS. BEM and scoped styles approach was used for this small application. For lager applications it makes sense to use css frameworks (e.g. Tailwind) or create a custom utility class library. 
